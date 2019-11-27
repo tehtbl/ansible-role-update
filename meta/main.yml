@@ -18,6 +18,7 @@ galaxy_info:
         - bionic
 
   galaxy_tags:
+    - update
     - bootstrap
     - installer
     - server
@@ -28,3 +29,4 @@ galaxy_info:
 
 dependencies:
   - tehtbl.bootstrap
+  - tehtbl.reboot
