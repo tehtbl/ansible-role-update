@@ -3,25 +3,33 @@
 # tasks file for update
 # ------------------------------------------------------------------------
 
-- name: install update
-  package:
-    name: "{{ update_packages }}"
-    state: present
-  register: update_install_update
-  until: update_install_update is succeeded
+- name: update all software (apt)
+  apt:
+    update_cache: yes
+    upgrade: "{{ update_upgrade_command }}"
+    cache_valid_time: "{{ update_cache_valid_time }}"
+  register: update_all_software_apt
+  when:
+    - ansible_pkg_mgr == "apt"
+  until: update_all_software_apt is succeeded
   retries: 3
 
-- name: configure update
-  template:
-    src: "{{ update_config_file }}.j2"
-    dest: "{{ update_config_directory }}/{{ update_config_file }}"
-  notify:
-    - restart update
-
-- name: start and enable update
-  service:
-    name: "{{ update_service }}"
-    state: started
-    enabled: true
+- name: apt autoremove (apt)
+  apt:
+    autoremove: "{{ update_autoremove }}"
   when:
-    - ansible_virtualization_type != "docker"
+    - ansible_pkg_mgr == "apt"
+    - update_autoremove == "yes"
+  tags:
+    - skip_ansible_lint
+
+- name: reboot for updates
+  include_role:
+    name: tehtbl.reboot
+  vars:
+    reboot_message: rebooting for tehtbl/ansible-role-update
+  when:
+    - update_all_software_apt.changed or
+    - update_reboot | bool
+  tags:
+    - skip_ansible_lint

@@ -5,6 +5,4 @@
   gather_facts: false
 
   roles:
-    - role: tehtbl.bootstrap
     - role: update
-      update_parameter: value

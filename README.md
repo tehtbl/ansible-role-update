@@ -1,10 +1,10 @@
 <!-- get id via: ansible-galaxy info tehtbl.update | grep -i "id:" -->
-<a href="https://galaxy.ansible.com/tehtbl/update"><img src="https://img.shields.io/ansible/role/44496"/></a> <a href="https://galaxy.ansible.com/tehtbl/bootstrap"><img src="https://img.shields.io/ansible/quality/44496"/></a> <a href="https://travis-ci.org/tehtbl/ansible-role-update"><img src="https://travis-ci.org/tehtbl/ansible-role-update.svg?branch=master" alt="Build status"/></a>
+<a href="https://galaxy.ansible.com/tehtbl/update"><img src="https://img.shields.io/ansible/role/44969"/></a> <a href="https://galaxy.ansible.com/tehtbl/bootstrap"><img src="https://img.shields.io/ansible/quality/44969"/></a> <a href="https://travis-ci.org/tehtbl/ansible-role-update"><img src="https://travis-ci.org/tehtbl/ansible-role-update.svg?branch=master" alt="Build status"/></a>
 
 Role Description
 ================
 
-Ansible role to install and configure update on your system.
+Install updates on a system.
 
 Example Playbook
 ================
@@ -24,7 +24,7 @@ This example is taken from `molecule/default/playbook.yml`:
   roles:
     - role: tehtbl.bootstrap
     - role: tehtbl.update
-      update_parameter: value
+
 ```
 
 Role Variables
@@ -38,6 +38,19 @@ These variables are set in `defaults/main.yml`:
 # defaults file for update
 # ------------------------------------------------------------------------
 
+# For APT (Debian/Ubuntu) only: remove unused dependency packages for all module states except `build-dep'
+update_autoremove: no
+
+# For APT (Debian/Ubuntu) only: apt_upgrade type which can be: dist, full, yes, or safe
+update_upgrade_command: safe
+
+# For APT (Debian/Ubuntu) only: update the apt cache if it's older than the cache_valid_time.  Set in seconds.
+update_cache_valid_time: 7200
+
+# When updating systems, a reboot may be required. Here you can select to:
+# "yes": Always reboot when packages have changed.
+# "no": Never reboot when packages have changed.
+update_reboot: yes
 
 ```
 
