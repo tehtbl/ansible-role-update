@@ -1,0 +1,4 @@
+---
+repository:
+  description: Ansible role to install and configure update on your system.
+  homepage: https://github.com/tehtbl/ansible-role-update

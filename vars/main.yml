@@ -1,0 +1,10 @@
+---
+# ------------------------------------------------------------------------
+# vars file for update
+# ------------------------------------------------------------------------
+
+_update_packages:
+  default:
+    - update
+
+update_packages: "{{ _update_packages[ansible_os_family] | default(_update_packages['default']) }}"
