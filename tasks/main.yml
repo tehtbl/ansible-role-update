@@ -5,7 +5,7 @@
 
 - name: update all software (apt)
   apt:
-    update_cache: yes
+    update_cache: true
     upgrade: "{{ update_upgrade_command }}"
     cache_valid_time: "{{ update_cache_valid_time }}"
   register: update_all_software_apt
@@ -19,7 +19,7 @@
     autoremove: "{{ update_autoremove }}"
   when:
     - ansible_pkg_mgr == "apt"
-    - update_autoremove == "yes"
+    - update_autoremove | bool
   tags:
     - skip_ansible_lint
 
@@ -29,7 +29,7 @@
   vars:
     reboot_message: rebooting for tehtbl/ansible-role-update
   when:
-    - update_all_software_apt.changed or
+    - update_all_software_apt.changed
     - update_reboot | bool
   tags:
     - skip_ansible_lint

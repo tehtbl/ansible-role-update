@@ -9,7 +9,7 @@ Install updates on a system.
 Example Playbook
 ================
 
-This example is taken from `molecule/default/playbook.yml`:
+This example is taken from `molecule/default/playbook.yml` and is tested on each push, pull request and release.
 
 ```yaml
 ---
