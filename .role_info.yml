@@ -1,0 +1,10 @@
+---
+gid: 44969
+name: update
+desc: Install updates on your system.
+reqs:
+  - tehtbl.bootstrap
+  - tehtbl.reboot
+tags:
+  - updating
+  - update
