@@ -4,7 +4,7 @@
 Role Description
 ================
 
-Install updates on a system.
+Install updates on your system.
 
 Example Playbook
 ================
@@ -13,17 +13,27 @@ This example is taken from `molecule/default/playbook.yml` and is tested on each
 
 ```yaml
 ---
-# ------------------------------------------------------------------------
-# Install and configure update
-# ------------------------------------------------------------------------
-- name: update
+- name: Converge
   hosts: all
   become: true
   gather_facts: false
 
   roles:
-    - role: tehtbl.bootstrap
-    - role: tehtbl.update
+    - tehtbl.role: update
+
+```
+
+The machine you are running this on, may need to be prepared, I use this playbook to ensure everything is in place to let the role work.
+
+```yaml
+---
+- name: Prepare
+  hosts: all
+  become: true
+  gather_facts: false
+
+  roles:
+    - tehtbl.tehtbl.bootstrap
 
 ```
 
@@ -39,7 +49,7 @@ These variables are set in `defaults/main.yml`:
 # ------------------------------------------------------------------------
 
 # For APT (Debian/Ubuntu) only: remove unused dependency packages for all module states except `build-dep'
-update_autoremove: no
+update_autoremove: false
 
 # For APT (Debian/Ubuntu) only: apt_upgrade type which can be: dist, full, yes, or safe
 update_upgrade_command: safe
@@ -50,7 +60,7 @@ update_cache_valid_time: 7200
 # When updating systems, a reboot may be required. Here you can select to:
 # "yes": Always reboot when packages have changed.
 # "no": Never reboot when packages have changed.
-update_reboot: yes
+update_reboot: true
 
 ```
 
@@ -58,12 +68,11 @@ Requirements
 ============
 
 - Access to a repository containing packages, likely on the internet.
-- A recent version of Ansible (Tests run on the current, previous and next release of Ansible).
+- A recent version of Ansible. (Tests run on the current, previous and next release of Ansible.)
 
 The following roles can be installed to ensure all requirements are met, using `ansible-galaxy install -r requirements.yml`:
 
 ```yaml
----
 - tehtbl.bootstrap
 - tehtbl.reboot
 
@@ -147,7 +156,7 @@ vagrant up
 License
 =======
 
-GNU General Public License v3.0
+MIT License
 
 Author Information
 ==================

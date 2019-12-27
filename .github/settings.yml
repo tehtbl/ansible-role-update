@@ -1,4 +1,4 @@
 ---
 repository:
-  description: Install updates on a system.
+  description: Install updates on your system.
   homepage: https://github.com/tehtbl/ansible-role-update
