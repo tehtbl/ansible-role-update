@@ -19,7 +19,7 @@ This example is taken from `molecule/default/playbook.yml` and is tested on each
   gather_facts: false
 
   roles:
-    - tehtbl.role: update
+    - role: tehtbl.update
 
 ```
 
@@ -33,7 +33,7 @@ The machine you are running this on, may need to be prepared, I use this playboo
   gather_facts: false
 
   roles:
-    - tehtbl.tehtbl.bootstrap
+    - tehtbl.bootstrap
 
 ```
 
