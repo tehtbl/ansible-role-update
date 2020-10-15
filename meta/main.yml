@@ -29,5 +29,4 @@ galaxy_info:
     - linux
 
 dependencies:
-  - tehtbl.bootstrap
   - tehtbl.reboot

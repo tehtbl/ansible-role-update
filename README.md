@@ -73,7 +73,6 @@ Requirements
 The following roles can be installed to ensure all requirements are met, using `ansible-galaxy install -r requirements.yml`:
 
 ```yaml
-- tehtbl.bootstrap
 - tehtbl.reboot
 
 ```
